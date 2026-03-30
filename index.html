@@ -1275,6 +1275,87 @@
       font-weight: 600;
     }
 
+    /* ─── SWIFT / INTERNATIONAL TRANSFER ─── */
+    .swift-card {
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 2rem auto 0;
+      text-align: left;
+    }
+
+    .swift-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .swift-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .swift-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .swift-row:last-child { border-bottom: none; }
+
+    .swift-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .swift-value {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: white;
+      text-align: right;
+    }
+
+    .swift-mono {
+      font-family: monospace;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      color: var(--yellow);
+    }
+
+    .swift-note {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .swift-contact {
+      display: block;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--yellow);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .swift-contact:hover { color: #fcd04a; }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .about-grid,
@@ -1603,6 +1684,36 @@
       </div>
 
       <p class="qr-note">📱 Open your banking app → Scan QR → Done. Bank hotline: 023 994 444 / 015 999 233</p>
+
+      <!-- INTERNATIONAL TRANSFER -->
+      <div class="swift-card">
+        <div class="swift-title">🌍 International Bank Transfer</div>
+        <div class="swift-grid">
+          <div class="swift-row">
+            <span class="swift-label">Account Name</span>
+            <span class="swift-value">Savong Organization Cambodia</span>
+          </div>
+          <div class="swift-row">
+            <span class="swift-label">Bank</span>
+            <span class="swift-value">ACLEDA Bank Plc.</span>
+          </div>
+          <div class="swift-row">
+            <span class="swift-label">SWIFT Code</span>
+            <span class="swift-value swift-mono">ACLBKHPPXXX</span>
+          </div>
+          <div class="swift-row">
+            <span class="swift-label">Bank Address</span>
+            <span class="swift-value">61 Preah Monivong Blvd., Phnom Penh, Cambodia</span>
+          </div>
+          <div class="swift-row">
+            <span class="swift-label">Merchant ID</span>
+            <span class="swift-value swift-mono">18780473</span>
+          </div>
+        </div>
+        <p class="swift-note">For international transfers please email us first so we can confirm account details and acknowledge your donation.</p>
+        <a href="mailto:info@savongeducation.com?subject=International%20Transfer" class="swift-contact">Contact us before transferring →</a>
+      </div>
+
       <div class="donate-btns" style="margin-top:1.5rem;">
         <a href="#involve" class="btn-wout">Get Involved →</a>
       </div>

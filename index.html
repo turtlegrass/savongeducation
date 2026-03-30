@@ -515,10 +515,13 @@
       width: 100%;
       aspect-ratio: 4/3;
       object-fit: cover;
-      object-position: center 80%;
+      object-position: center 40%;
       display: block;
       transition: filter 0.3s, transform 0.3s;
     }
+
+    .photo-grid img:first-child { object-position: center 40%; }
+    .photo-grid img:last-child  { object-position: center top; }
 
     .photo-grid img:hover { filter: brightness(1.08); transform: scale(1.025); position: relative; z-index: 2; }
 

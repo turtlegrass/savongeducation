@@ -63,7 +63,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
-  <script src="https://www.paypal.com/sdk/js?client-id=BAAweJOEilIKBL3HgL71x-3CaczvQKCQNQXH3eCZxtBipmyvHyv4C8zBcRpgzrMJJGtUGXXVmQ7Q7grwjg&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
 
   <style>
     :root {
@@ -879,85 +878,28 @@
     /* ─── FOOTER ─── */
     footer {
       background: var(--ink);
-      color: rgba(255,255,255,0.55);
-      padding: 3rem 2.5rem;
       position: relative;
       z-index: 1;
     }
 
-    .footer-wave {
-      position: center;
-      top: -2px; left: 0; right: 0;
-      line-height: 0;
-    }
-
-    .footer-inner {
+    .footer-minimal {
       max-width: 1100px;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .footer-brand img {
-      height: 48px; width: 48px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.2);
-    }
-
-    .footer-brand-text {
-      font-size: 1rem;
-      font-weight: 600;
-      color: white;
-      line-height: 1.3;
-    }
-
-    .footer-brand-text span {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.38);
-      letter-spacing: 0.08em;
-      margin-top: 0.15rem;
-    }
-
-    .footer-info { text-align: right; }
-
-    .footer-info p {
-      font-size: 0.8rem;
-      font-weight: 600;
-      line-height: 2;
-    }
-
-    .footer-info a { color: var(--blue); text-decoration: none; }
-    .footer-info a:hover { color: white; }
-
-    .footer-bottom {
-      max-width: 1100px;
-      margin: 2rem auto 0;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1.8rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.72rem;
-      font-weight: 600;
       flex-wrap: wrap;
       gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.35);
     }
 
     .footer-ngo {
       background: rgba(255,255,255,0.07);
-      padding: 0.3rem 0.9rem;
-      border-radius: var(--radius-btn);
+      padding: 0.25rem 0.8rem;
+      border-radius: 4px;
       letter-spacing: 0.06em;
     }
 
@@ -1782,9 +1724,9 @@
         <a href="mailto:info@savongeducation.com?subject=International%20Transfer" class="swift-contact">Contact us before transferring →</a>
       </div>
 
-      <!-- PAYPAL -->
+      <!-- PAYPAL POOL -->
       <div class="paypal-wrap">
-        <p class="paypal-label">Donate securely with PayPal</p>
+        <p class="paypal-label">Donate via PayPal</p>
         <div class="paypal-logo-row">
           <svg width="100" height="26" viewBox="0 0 100 26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.337 2.285H6.115C5.698 2.285 5.344 2.59 5.28 3.002L2.778 18.983c-.047.3.185.571.489.571h2.9c.417 0 .771-.305.835-.717l.67-4.247c.063-.412.418-.717.835-.717h1.956c4.073 0 6.422-1.971 7.034-5.878.277-1.708.011-3.049-.79-3.989-.879-1.034-2.44-1.721-4.37-1.721zm.714 5.79c-.338 2.217-2.033 2.217-3.672 2.217h-.932l.654-4.143c.039-.25.256-.434.509-.434h.427c1.116 0 2.169 0 2.712.636.325.38.424.943.302 1.724z" fill="white"/>
@@ -1795,22 +1737,10 @@
             <path d="M93.144 2.665l-2.53 16.318c-.047.3.185.571.489.571h2.508c.417 0 .771-.305.835-.717L96.95 2.856c.047-.3-.185-.571-.489-.571h-2.808c-.253 0-.47.184-.509.38z" fill="#009CDE"/>
           </svg>
         </div>
-        <div id="paypal-container-39CL7CJ7JDRVQ"></div>
-        <script>
-          if (typeof paypal !== 'undefined') {
-            paypal.HostedButtons({
-              hostedButtonId: "39CL7CJ7JDRVQ",
-            }).render("#paypal-container-39CL7CJ7JDRVQ")
-          }
-        </script>
-        <p class="paypal-sub">Secure · No account needed · All currencies accepted</p>
-      </div>
-
-      <div class="donate-btns" style="margin-top:1.5rem;">
-        <a href="https://www.paypal.com/ncp/payment/39CL7CJ7JDRVQ" target="_blank" rel="noopener" class="btn-paypal-cta">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.147 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-          Click Here to pay directly on Paypal.com
+        <a href="https://www.paypal.com/pool/9nY6KF1l3C?sr=wccr" target="_blank" rel="noopener" class="btn-paypal-cta">
+          Donate Now
         </a>
+        <p class="paypal-sub">Secure · No account needed · All currencies accepted</p>
       </div>
       <div class="donate-wave-bot">
         <svg viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -1888,26 +1818,7 @@
 
     <!-- FOOTER -->
     <footer id="contact">
-      <div class="footer-wave">
-        <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,20 C360,40 1080,0 1440,20 L1440,0 L0,0 Z" fill="#00a0d6"/>
-        </svg>
-      </div>
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <img src="images/logo-new.png" alt="Savong Organization Cambodia" width="48" height="48" />
-          <div class="footer-brand-text">
-            Savong Education
-            <span>Savong Organization Cambodia · NGO 1372</span>
-          </div>
-        </div>
-        <div class="footer-info">
-          <p>Prasat Bakong, Siem Reap, Cambodia</p>
-          <p>Email: <a href="mailto:Info@savongeducation.com">Info@savongeducation.com</a></p>
-          <p>Phone / Telegram: <a href="tel:+85512345678">+855 012 345 678</a></p>
-          <p><a href="https://www.savongeducation.com">www.savongeducation.com</a></p>
-        </div>
-      <div class="footer-bottom">
+      <div class="footer-minimal">
         <span>© 2026 Savong Organization Cambodia. All rights reserved.</span>
         <span class="footer-ngo">NGO Registration No. 1372</span>
       </div>

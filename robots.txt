@@ -1,43 +1,70 @@
-STREAMING_CHUNK:Configuring general search engine crawler access...
-robots.txt for Savong Education (https://savongeducation.org)
-Registered NGO No. 1372 | Prasat Bakong, Siem Reap, Cambodia
+robots.txt for Savong Education Bakong (https://savongeducation.org)
+
+Second Rural Campus | Prasat Bakong District, Siem Reap Province, Cambodia
+
+Registered NGO No. 1372 (Savong Organization Cambodia)
+
 --------------------------------------------------
+
 Standard Web Crawlers & Search Engines
+
 --------------------------------------------------
+
 User-agent: *
 Allow: /
 Disallow: /placeholder.txt
+
 User-agent: Googlebot
 Allow: /
+
 User-agent: Bingbot
 Allow: /
+
 User-agent: Applebot
 Allow: /
-STREAMING_CHUNK:Specifying AI and LLM answer engine permissions...
+
 --------------------------------------------------
+
 AI Search & Answer Engine Crawlers (AEO Optimization)
+
 Allows ChatGPT, Perplexity, Claude, and Gemini to index
-factual school info for citation in conversational search
+
+factual school info, 2nd campus location data, and FAQ answers
+
 --------------------------------------------------
+
 OpenAI (SearchGPT & ChatGPT browsing)
+
 User-agent: GPTBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
+
 Perplexity AI search
+
 User-agent: PerplexityBot
 Allow: /
+
 Anthropic (Claude search & citations)
+
 User-agent: ClaudeBot
 Allow: /
+
 Google Gemini / AI Overviews training & retrieval
+
 User-agent: Google-Extended
 Allow: /
+
 Apple Intelligence
+
 User-agent: Applebot-Extended
 Allow: /
-STREAMING_CHUNK:Declaring XML sitemap location...
+
 --------------------------------------------------
+
 Sitemap Declaration
+
 --------------------------------------------------
+
 Sitemap: https://savongeducation.org/sitemap.xml

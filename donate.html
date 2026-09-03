@@ -3,530 +3,750 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donate — Savong Education Cambodia</title>
-  <meta name="description" content="Support Savong Education. Donate by card, PayPal, Apple Pay or ACLEDA Bank. Every dollar goes directly to students in Prasat Bakong, Siem Reap." />
-
-  <!-- FIX 7: Both Google Fonts preconnects required (googleapis + gstatic crossorigin) -->
+  <title>Donate to Savong Education — Free School in Siem Reap</title>
+  <meta name="description" content="Support Savong Education in Prasat Bakong, Siem Reap. Give securely by Card, Apple Pay, Google Pay, KHQR (Bakong/ABA/ACLEDA), PayPal, or bank wire." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!--
-    FIX 1 + 2 + 3: Only ONE Donorbox script, correct file (widgets.js for <dbox-widget>),
-    no paypalExpress attribute (belongs to iframe version only),
-    no `async` (module scripts defer by default — async causes race condition).
-  -->
-  <script type="module" src="https://donorbox.org/widgets.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Donorbox Official Widget Library -->
+  <script type="module" src="https://donorbox.org/widgets.js" async></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['Lora', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50:  '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              900: '#0c4a6e',
+            },
+            accent: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --blue:        #00a0d6;
-      --blue-dark:   #0082b0;
-      --blue-light:  #d0eef8;
-      --blue-pale:   #e8f7fc;
-      --yellow:      #f5a623;
-      --yellow-light:#fef5e7;
-      --red:         #d4291f;
-      --ink:         #162535;
-      --ink-mid:     #345068;
-      --ink-soft:    #7a9aaa;
-      --border:      #d4e8f0;
-      --white:       #ffffff;
+    /* Custom clean scrollbars and focus rings */
+    :focus-visible {
+      outline: 2px solid #0284c7;
+      outline-offset: 2px;
     }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--blue-pale);
-      color: var(--ink);
-      line-height: 1.6;
-      padding-top: 68px; /* offset for fixed nav */
-    }
-    img  { max-width: 100%; display: block; }
-    a    { color: inherit; text-decoration: none; }
-
-    /* ── NAV — identical to main site ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.9rem 2.5rem;
-      background: rgba(0, 140, 190, 0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 3px solid rgba(255,255,255,0.18);
-      transition: padding .3s;
-    }
-    nav.scrolled { padding: 0.6rem 2.5rem; }
-
-    .nav-logo {
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .nav-logo img {
-      height: 42px; width: 42px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.5);
-      object-fit: cover;
-    }
-    .nav-logo-text {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem; font-weight: 600;
-      color: #fff; line-height: 1.2;
-      letter-spacing: .01em;
-    }
-    .nav-logo-text span {
-      display: block; font-size: .62rem; font-weight: 600;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(255,255,255,.65);
-    }
-    .nav-cta {
-      background: var(--yellow); color: var(--ink);
-      padding: .55rem 1.5rem; border-radius: 6px;
-      font-size: .85rem; font-weight: 600;
-      letter-spacing: .02em;
-      transition: background .2s, transform .15s;
-      box-shadow: 0 3px 10px rgba(0,0,0,.15);
-    }
-    .nav-cta:hover { background: #fcd04a; transform: translateY(-1px); }
-    @media (max-width: 480px) { nav { padding: .7rem 1.25rem; } .nav-cta { padding: .5rem 1rem; font-size: .8rem; } }
-
-    /* ── HERO BANNER ── */
-    .hero {
-      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
-      padding: 4rem 1.5rem 3.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url('https://savongeducation.com/images/hero-volunteer.jpg') center/cover no-repeat;
-      opacity: .12;
-    }
-    .hero > * { position: relative; }
-    .eyebrow {
-      display: block; font-size: 11px; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: rgba(255,255,255,.6); margin-bottom: .75rem;
-    }
-    .hero h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(26px, 4vw, 40px);
-      font-weight: 600; line-height: 1.2; color: var(--white);
-      max-width: 620px; margin: 0 auto .9rem;
-    }
-    .hero p {
-      font-size: 16px; color: rgba(255,255,255,.8);
-      max-width: 520px; margin: 0 auto 2.5rem;
-      font-weight: 300; line-height: 1.75;
-    }
-
-    .hero-stats {
-      display: flex; justify-content: center;
-      gap: 0; flex-wrap: wrap;
-      max-width: 640px; margin: 0 auto;
-      background: rgba(0,0,0,.15);
-      border-radius: 12px; overflow: hidden;
-    }
-    .hero-stat {
-      flex: 1; min-width: 140px;
-      padding: 1rem 1.5rem;
-      border-right: 1px solid rgba(255,255,255,.12);
-    }
-    .hero-stat:last-child { border-right: none; }
-    .hero-stat-num {
-      font-family: 'Lora', serif; font-size: 30px;
-      font-weight: 600; color: var(--yellow); display: block;
-    }
-    .hero-stat-lbl {
-      font-size: 12px; color: rgba(255,255,255,.65);
-      display: block; margin-top: 2px;
-    }
-    @media (max-width: 500px) {
-      .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); padding: .75rem 1rem; }
-      .hero-stat:last-child { border-bottom: none; }
-    }
-
-    /* ── PAGE BODY ── */
-    .page { max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
-
-    /* ── INTRO ── */
-    .intro {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem;
-      margin-bottom: 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+    
+    /* QR code scan-optimized container */
+    .qr-canvas-box {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      aspect-ratio: 1 / 1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
-    .intro-text h2 {
-      font-family: 'Lora', serif; font-size: 24px;
-      font-weight: 600; margin-bottom: .9rem; line-height: 1.3;
-      color: var(--ink);
-    }
-    .intro-text p {
-      font-size: 15px; color: var(--ink-mid);
-      line-height: 1.8; margin-bottom: .85rem;
-    }
-    /* FIX 8: was p:last-child which never matched (last child is .intro-highlight div) */
-    .intro-text .intro-highlight { margin-top: .25rem; }
-    .intro-text strong { color: var(--ink); }
-    .intro-highlight {
-      background: var(--blue-pale);
-      border-left: 3px solid var(--blue);
-      border-radius: 0 8px 8px 0;
-      padding: 1rem 1.25rem;
-    }
-    .intro-highlight p { font-family: 'Lora', serif; font-style: italic; font-size: 15px; color: var(--ink-mid); line-height: 1.7; margin: 0; }
-    .intro-highlight cite { font-size: 12px; color: var(--blue-dark); font-style: normal; display: block; margin-top: .4rem; font-weight: 600; }
-    .intro-img {
-      border-radius: 12px; width: 100%;
-      height: 280px; object-fit: cover;
-      box-shadow: 0 8px 24px rgba(0,130,176,.15);
-    }
-    @media (max-width: 700px) {
-      .intro { grid-template-columns: 1fr; }
-      .intro-img { height: 200px; }
-    }
-
-    /* ── MAIN DONATE GRID ── */
-    .donate-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 2rem; align-items: start;
-    }
-    @media (max-width: 860px) { .donate-grid { grid-template-columns: 1fr; } }
-
-    /* ── DONORBOX COLUMN ── */
-    .dbox-label {
-      font-size: 11px; font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--ink-soft);
-      margin-bottom: .75rem; display: block;
-    }
-    .dbox-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden; width: 100%;
-    }
-    /* FIX 4: selector now matches the actual dbox-widget element */
-    dbox-widget {
-      display: block;
+    .qr-canvas-box img {
       width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
 
-    /* ── RIGHT COLUMN ── */
-    .right-col { display: flex; flex-direction: column; gap: 1.25rem; }
-
-    .info-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.4rem;
+    /* Modal transition */
+    .lightbox-modal {
+      transition: opacity 0.2s ease, visibility 0.2s ease;
     }
-    .card-title {
-      font-size: 13px; font-weight: 600; color: var(--ink);
-      margin-bottom: .8rem;
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    .lightbox-modal.hidden-modal {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
-    .badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: .04em; }
-    .badge-kh   { background: #e8142a; color: #fff; }
-    .badge-intl { background: #1a3a6b; color: #fff; }
-    .badge-pp   { background: #003087; color: #fff; }
-
-    .b-row {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; gap: 1rem;
-      padding: 7px 0; border-bottom: 1px solid var(--blue-pale);
-      font-size: 13px;
-    }
-    .b-row:last-child { border-bottom: none; }
-    .b-lbl { color: var(--ink-soft); flex-shrink: 0; }
-    .b-val { font-weight: 600; color: var(--ink); text-align: right; }
-
-    /* QR codes */
-    .qr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: .9rem; }
-    .qr-item { text-align: center; }
-    .qr-item img { width: 100%; max-width: 130px; margin: 0 auto 5px; border-radius: 8px; border: 1px solid var(--border); }
-    .qr-lbl { font-size: 12px; font-weight: 600; color: var(--ink-mid); }
-    .qr-sub { font-size: 11px; color: var(--ink-soft); }
-
-    /* PayPal button */
-    .paypal-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: #003087; color: #fff;
-      padding: 12px; border-radius: 8px;
-      font-size: 14px; font-weight: 600;
-      transition: background .15s; width: 100%; margin-top: .5rem;
-    }
-    .paypal-btn:hover { background: #001f5c; }
-
-    /* Impact card */
-    .impact-card {
-      background: var(--blue-pale);
-      border: 1px solid var(--blue-light);
-      border-radius: 12px; padding: 1.4rem;
-    }
-    .impact-title {
-      font-size: 13px; font-weight: 600; color: var(--blue-dark);
-      margin-bottom: .8rem;
-      display: flex; align-items: center; gap: 7px;
-    }
-    .impact-row { display: flex; align-items: flex-start; gap: 9px; padding: 7px 0; border-bottom: 1px solid rgba(0,160,214,.12); }
-    .impact-row:last-child { border-bottom: none; }
-    .idot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); margin-top: 8px; flex-shrink: 0; }
-    .itext { font-size: 13px; color: var(--ink-mid); line-height: 1.6; }
-    .itext strong { color: var(--blue-dark); font-weight: 600; }
-
-    /* Thank you card */
-    .thankyou-card {
-      background: var(--ink);
-      border-radius: 12px; padding: 1.75rem;
-      text-align: center;
-    }
-    .thankyou-card h3 { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: .6rem; }
-    .thankyou-card p  { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 1rem; }
-    .contact-btn {
-      display: inline-block;
-      background: var(--yellow); color: var(--ink);
-      padding: 9px 20px; border-radius: 7px;
-      font-size: 13px; font-weight: 600;
-      transition: background .15s;
-    }
-    .contact-btn:hover { background: #fcd04a; }
-
-    /* ── FOOTER — identical to main site ── */
-    footer {
-      background: var(--ink);
-      position: relative; z-index: 1;
-    }
-    .footer-minimal {
-      max-width: 1100px; margin: 0 auto;
-      padding: 1.8rem 2.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: .5rem;
-      font-size: .72rem; font-weight: 400;
-      color: rgba(255,255,255,.35);
-    }
-    .footer-ngo {
-      background: rgba(255,255,255,.07);
-      padding: .25rem .8rem; border-radius: 4px;
-      letter-spacing: .06em;
-      display: inline-block; margin-top: .25rem;
-    }
-    .footer-socials {
-      display: flex; gap: .6rem;
-      align-items: center;
-    }
-    .fsoc {
-      width: 34px; height: 34px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform .15s, opacity .15s;
-      opacity: .75;
-    }
-    .fsoc:hover { transform: translateY(-2px); opacity: 1; }
-    .fsoc svg { width: 16px; height: 16px; }
-    .fsoc-fb { background: #1877f2; color: #fff; }
-    .fsoc-tg { background: #229ed9; color: #fff; }
-    .fsoc-wa { background: #25d366; color: #fff; }
-    @media (max-width: 600px) {
-      .footer-minimal { flex-direction: column; text-align: center; }
-      .footer-socials { justify-content: center; margin-top: .5rem; }
+    .lightbox-modal.active-modal {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
   </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900 min-h-screen flex flex-col">
 
-<!-- NAV — identical to main site -->
-<nav id="main-nav">
-  <a href="/" class="nav-logo">
-    <img src="https://savongeducation.com/images/logo-new.png" alt="Savong Organization Cambodia logo">
-    <span class="nav-logo-text">
-      Savong Education
-      <span>Prasat Bakong · Siem Reap</span>
-    </span>
-  </a>
-  <a href="/#donate" class="nav-cta">Home Page</a>
-</nav>
-
-<!-- HERO BANNER -->
-<div class="hero">
-  <span class="eyebrow">Savong Education · Prasat Bakong · Siem Reap</span>
-  <h1>Thank You For Your Interest In Supporting Our Students</h1>
-  <p>Everything we do is only possible through the generous donations of people around the world. From buying books and school materials to keeping the doors open every single day — every bit really does help.</p>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-num">100%</span>
-      <span class="hero-stat-lbl">goes to students</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">Free</span>
-      <span class="hero-stat-lbl">for all families</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">Daily</span>
-      <span class="hero-stat-lbl">school, every day</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-num">NGO</span>
-      <span class="hero-stat-lbl">Reg. No. 1372</span>
-    </div>
-  </div>
-</div>
-
-<!-- PAGE -->
-<div class="page">
-
-  <!-- INTRO -->
-  <div class="intro">
-    <div class="intro-text">
-      <h2>Your generosity makes this school possible.</h2>
-      <p>From buying books, pens and school materials, to covering teacher costs and keeping the lights on — <strong>every single bit really does help.</strong></p>
-      <p>Savong Education is run by a small local team with no outside grants or management. The school stays open because of people like you.</p>
-      <p>We are proud that <strong>100% of all donations are used directly for the students and school.</strong> You can feel confident your donation is creating a real future for children in rural Cambodia.</p>
-      <div class="intro-highlight">
-        <p>"If you choose to support Savong Education, you are putting money directly into a child's week. That is what it comes down to."</p>
-        <cite>— The Savong Education Team</cite>
-      </div>
-    </div>
-    <img src="https://savongeducation.com/images/student-smile.jpg" alt="Student at Savong Education" class="intro-img">
-  </div>
-
-  <!-- MAIN DONATE GRID -->
-  <div class="donate-grid">
-
-    <!-- LEFT: Donorbox web component — donor never leaves this page -->
-    <div>
-      <span class="dbox-label">International donations — card, PayPal, Apple Pay · stays on this page</span>
-      <div class="dbox-card">
-        <!--
-          FIX 1–3: Single correct embed using <dbox-widget> web component.
-          Script is in <head> with type="module" and no async (deferred by default,
-          so the custom element registry is ready before the element is upgraded).
-          No paypalExpress attribute needed on the module script.
-        -->
-        <dbox-widget
-          campaign="savong-organization-kh"
-          type="donation_form"
-          enable-auto-scroll="true">
-        </dbox-widget>
-      </div>
-    </div>
-
-    <!-- RIGHT: All local + alternative payment options -->
-    <div class="right-col">
-
-      <!-- Impact — what the money does -->
-      <div class="impact-card">
-        <div class="impact-title">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#0082b0" stroke-width="1.2"/><path d="M4 7l2 2 4-4" stroke="#0082b0" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          What your donation does
+  <!-- HEADER / NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-brand-700/95 backdrop-blur-md border-b border-white/10 text-white shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <a href="https://savongeducation.org/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full bg-white p-0.5 overflow-hidden ring-2 ring-white/30 shrink-0">
+          <img 
+            src="SOC-Logo (1).jpg" 
+            alt="Savong Organization Cambodia" 
+            class="w-full h-full object-cover rounded-full"
+            onerror="this.onerror=null; this.src='https://savongeducation.org/images/logo-new.png';"
+          />
         </div>
-        <div class="impact-row"><div class="idot"></div><div class="itext"><strong>$5 / month</strong> — school supplies for one student</div></div>
-        <div class="impact-row"><div class="idot"></div><div class="itext"><strong>$10 / month</strong> — weekly tutoring sessions for a child</div></div>
-        <div class="impact-row"><div class="idot"></div><div class="itext"><strong>$25 / month</strong> — full learning program for one month</div></div>
-        <div class="impact-row"><div class="idot"></div><div class="itext"><strong>$50 / month</strong> — scholarship with books &amp; mentorship</div></div>
-        <div class="impact-row"><div class="idot"></div><div class="itext"><strong>$100 / month</strong> — sponsors two students completely</div></div>
-      </div>
-
-      <!-- ACLEDA QR — Cambodia locals -->
-      <div class="info-card">
-        <div class="card-title">
-          🇰🇭 Local donations
-          <span class="badge badge-kh">CAMBODIA</span>
-        </div>
-        <p style="font-size:13px;color:var(--ink-mid);margin-bottom:.9rem;line-height:1.6;">
-          For local donations from inside Cambodia. Open your banking app → Scan QR → Done.
-        </p>
-        <div class="qr-row">
-          <div class="qr-item">
-            <img src="https://savongeducation.com/images/qr-usd.jpg" alt="ACLEDA Bank QR code USD">
-            <div class="qr-lbl">USD</div>
-            <div class="qr-sub">US Dollars</div>
+        <div class="leading-tight">
+          <div class="font-bold text-base tracking-tight flex items-center gap-2">
+            Savong Education
+            <span class="hidden sm:inline-block text-[10px] font-semibold tracking-wider uppercase bg-white/15 px-2 py-0.5 rounded text-sky-100">NGO #1372</span>
           </div>
-          <div class="qr-item">
-            <img src="https://savongeducation.com/images/qr-khmer.jpg" alt="ACLEDA Bank QR code KHR">
-            <div class="qr-lbl">KHR</div>
-            <div class="qr-sub">Khmer Riel</div>
-          </div>
+          <p class="text-xs text-sky-200 font-medium hidden xs:block">Prasat Bakong · Siem Reap, Cambodia</p>
         </div>
-        <div class="b-row"><span class="b-lbl">Merchant</span><span class="b-val">Savong Organization Cam.</span></div>
-        <div class="b-row"><span class="b-lbl">Merchant ID</span><span class="b-val">18780473</span></div>
-        <div class="b-row"><span class="b-lbl">Bank</span><span class="b-val">ACLEDA Bank · KHQR</span></div>
-        <div class="b-row"><span class="b-lbl">Hotline</span><span class="b-val">023 994 444 / 015 999 233</span></div>
-      </div>
+      </a>
 
-      <!-- International wire transfer -->
-      <div class="info-card">
-        <div class="card-title">
-          🌍 International bank transfer
-          <span class="badge badge-intl">WIRE</span>
-        </div>
-        <div class="b-row"><span class="b-lbl">Account name</span><span class="b-val">Savong Organization Cambodia</span></div>
-        <div class="b-row"><span class="b-lbl">Bank</span><span class="b-val">ACLEDA Bank Plc.</span></div>
-        <div class="b-row"><span class="b-lbl">SWIFT code</span><span class="b-val">ACLBKHPPXXX</span></div>
-        <div class="b-row"><span class="b-lbl">Bank address</span><span class="b-val">61 Preah Monivong Blvd., Phnom Penh</span></div>
-        <div class="b-row"><span class="b-lbl">Merchant ID</span><span class="b-val">18780473</span></div>
-        <p style="font-size:12px;color:var(--ink-soft);margin-top:.85rem;line-height:1.6;">
-        </div>
-
-      <!-- PayPal direct -->
-      <div class="info-card">
-        <div class="card-title">
-          💳 Donate via PayPal
-          <span class="badge badge-pp">PAYPAL</span>
-        </div>
-        <p style="font-size:13px;color:var(--ink-mid);margin-bottom:.5rem;line-height:1.6;">No PayPal account needed. Pay by card securely.</p>
-        <a href="https://www.paypal.com/pool/9nY6KF1l3C?sr=wccr" target="_blank" rel="noopener" class="paypal-btn">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.825a1.98 1.98 0 0 0-1.96 1.676l-1.32 8.354a.641.641 0 0 0 .633.74h3.68a1.12 1.12 0 0 0 1.107-.944l.457-2.9c.084-.518.527-.9 1.052-.9h.663c4.298 0 7.664-1.747 8.647-6.797.412-2.12.157-3.9-.562-5.024z"/></svg>
-          Donate via PayPal
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="https://savongeducation.org/" class="text-xs sm:text-sm font-medium text-sky-100 hover:text-white transition">
+          ← Main Site
         </a>
-        <p style="font-size:11px;color:var(--ink-soft);text-align:center;margin-top:.55rem;">Secure · No account needed · All currencies accepted</p>
+        <a href="#donate-widget" class="bg-accent-500 hover:bg-accent-400 active:scale-95 text-slate-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+          <span>Give Now</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO HEADLINE & TRUST BAR -->
+  <section class="bg-gradient-to-b from-brand-700 to-brand-900 text-white pt-10 pb-16 px-4 text-center">
+    <div class="max-w-3xl mx-auto space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold tracking-wide uppercase">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Direct Community Impact · 100% Free School
+      </div>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight">
+        Keep our rural school open <br class="hidden sm:inline" />
+        <span class="italic text-accent-400 font-normal">from just $5 a month.</span>
+      </h1>
+      <p class="text-sky-100/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Savong Education provides free daily English classes, school supplies, sports, and life skills for over 200 children in Prasat Bakong.
+      </p>
+      
+      <!-- Trust badges row -->
+      <div class="pt-3 flex flex-wrap justify-center items-center gap-y-2 gap-x-6 text-xs text-sky-200">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Registered Cambodian NGO (#1372)
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Zero CEO / Overseas Salaries
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          100% Directly Funds Students & Teachers
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN DONATION APPARATUS -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 pb-16 flex-1 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- LEFT: THE DONATION CARD (7 COLS) -->
+      <div id="donate-widget" class="lg:col-span-7 bg-white rounded-2xl shadow-xl shadow-slate-900/10 border border-slate-200/90 overflow-hidden">
+        
+        <!-- Frequency Segmented Switch -->
+        <div class="p-4 sm:p-5 bg-slate-50 border-b border-slate-200">
+          <div class="flex rounded-xl bg-slate-200/80 p-1 font-semibold text-xs sm:text-sm">
+            <button type="button" id="btn-freq-monthly" class="flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5" onclick="setFrequency('monthly')">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Monthly Gift <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.2 rounded hidden sm:inline">Highest Impact</span>
+            </button>
+            <button type="button" id="btn-freq-once" class="flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5" onclick="setFrequency('once')">
+              One-Time Gift
+            </button>
+          </div>
+        </div>
+
+        <div class="p-5 sm:p-7 space-y-6">
+
+          <!-- 1. Amount Selector -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-700 tracking-wider uppercase">1. Select Amount</label>
+              <span id="impact-pill" class="text-xs font-medium text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-0.5 rounded-full">
+                Full student learning programme
+              </span>
+            </div>
+
+            <!-- Pre-set Tier Buttons -->
+            <div class="grid grid-cols-4 gap-2">
+              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700" data-amt="5" onclick="selectTier(5)">
+                $5
+              </button>
+              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700" data-amt="10" onclick="selectTier(10)">
+                $10
+              </button>
+              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-brand-600 bg-brand-50/80 text-brand-700 ring-2 ring-brand-500/20" data-amt="25" onclick="selectTier(25)">
+                $25
+              </button>
+              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700" data-amt="50" onclick="selectTier(50)">
+                $50
+              </button>
+            </div>
+
+            <!-- Custom Amount Option -->
+            <div class="relative flex items-center">
+              <span class="absolute left-3.5 text-slate-400 font-bold text-sm">$</span>
+              <input 
+                type="number" 
+                id="custom-amount" 
+                placeholder="Or enter custom USD amount" 
+                min="1"
+                class="w-full pl-8 pr-4 py-2.5 bg-slate-50 hover:bg-white focus:bg-white text-sm font-semibold rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition outline-none"
+                oninput="onCustomAmountChange(this.value)"
+              />
+            </div>
+          </div>
+
+          <!-- 2. Payment Method Selector Tabs -->
+          <div class="space-y-3 pt-2">
+            <label class="text-xs font-bold text-slate-700 tracking-wider uppercase block">2. Select Payment Method</label>
+            
+            <div class="grid grid-cols-4 gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+              <button type="button" id="tab-btn-card" class="pay-tab-btn py-2 px-1 rounded-lg bg-white text-brand-700 shadow-sm transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('card')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                <span>Card · Donorbox</span>
+              </button>
+              <button type="button" id="tab-btn-khqr" class="pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('khqr')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                <span>KHQR</span>
+              </button>
+              <button type="button" id="tab-btn-paypal" class="pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('paypal')">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.825a1.98 1.98 0 0 0-1.96 1.676l-1.32 8.354a.641.641 0 0 0 .633.74h3.68a1.12 1.12 0 0 0 1.107-.944l.457-2.9c.084-.518.527-.9 1.052-.9h.663c4.298 0 7.664-1.747 8.647-6.797.412-2.12.157-3.9-.562-5.024z"/></svg>
+                <span>PayPal</span>
+              </button>
+              <button type="button" id="tab-btn-bank" class="pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('bank')">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                <span>Bank Wire</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- METHOD CONTENT PANELS -->
+          <div class="border-t border-slate-100 pt-4">
+
+            <!-- PANEL 1: DONORBOX (Card / Apple Pay / Google Pay / Monthly) -->
+            <div id="method-panel-card" class="space-y-4">
+              
+              <!-- Donorbox Trust & Endorsement Header -->
+              <div class="bg-brand-50/70 border border-brand-100 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2 text-brand-900 font-semibold">
+                  <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                  <span>Verified Non-Profit Campaign</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-slate-500 font-medium text-[11px]">
+                  <span>Powered by</span>
+                  <span class="font-bold text-slate-800 tracking-tight flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-orange-500"></span> Donorbox
+                  </span>
+                </div>
+              </div>
+
+              <!-- Official Donorbox Embedded Widget Container -->
+              <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden min-h-[580px] flex items-center justify-center">
+                <dbox-widget 
+                  campaign="savong-education-school-support" 
+                  type="donation_form" 
+                  enable-auto-scroll="true" 
+                  show-content="true"
+                  style="width: 100%; min-height: 580px; display: block;">
+                </dbox-widget>
+              </div>
+
+              <!-- Express 1-Click Direct Stripe Fallback -->
+              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-600">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-[#635bff] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  <span>Prefer an express 1-click checkout window?</span>
+                </div>
+                <a 
+                  href="https://buy.stripe.com/bJe9AT8XV8OV3mW0ejcQU00" 
+                  target="_blank" 
+                  rel="noopener"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#635bff] hover:bg-[#5348eb] text-white font-semibold rounded-lg shadow-sm transition whitespace-nowrap text-xs active:scale-95"
+                >
+                  <span>Direct Stripe Link</span>
+                  <span>→</span>
+                </a>
+              </div>
+
+              <p class="text-[11px] text-slate-400 text-center flex items-center justify-center gap-1">
+                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Protected by 256-bit encryption. Card statement: <strong>Savong Organization Cambodia</strong>.
+              </p>
+            </div>
+
+            <!-- PANEL 2: KHQR (Cambodia Bakong, ACLEDA, ABA, Wing) -->
+            <div id="method-panel-khqr" class="hidden space-y-4">
+              <div class="bg-amber-50 border border-amber-200/80 rounded-xl p-3 text-xs text-amber-900 flex items-start gap-2">
+                <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Scan using <strong>ACLEDA, ABA, Wing</strong>, or any Bakong-linked Cambodian mobile banking app.</span>
+              </div>
+
+              <!-- Two QR Cards (USD and KHR) -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- USD QR Card -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-center flex flex-col items-center">
+                  <div class="flex items-center justify-between w-full mb-2">
+                    <span class="text-xs font-bold text-slate-800">USD Currency</span>
+                    <span class="text-[10px] bg-brand-100 text-brand-800 font-bold px-1.5 py-0.5 rounded">US Dollars</span>
+                  </div>
+                  
+                  <div class="qr-canvas-box w-44 mb-2 cursor-pointer hover:border-brand-400 transition group relative" onclick="openLightbox('https://savongeducation.org/images/qr-usd.jpg', 'KHQR Donation (USD)')">
+                    <img 
+                      src="https://savongeducation.org/images/qr-usd.jpg" 
+                      alt="Savong KHQR USD"
+                      onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Savong-Education-USD';"
+                    />
+                    <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center text-xs font-bold text-slate-900 bg-white/70 backdrop-blur-[1px]">
+                      Tap to enlarge
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2 w-full mt-auto">
+                    <button type="button" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-white border border-slate-200 rounded-lg hover:border-brand-500 hover:text-brand-700 transition" onclick="openLightbox('https://savongeducation.org/images/qr-usd.jpg', 'KHQR Donation (USD)')">
+                      🔍 Enlarge
+                    </button>
+                    <a href="https://savongeducation.org/images/qr-usd.jpg" download="Savong-KHQR-USD.jpg" target="_blank" rel="noopener" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg hover:bg-brand-100 transition flex items-center justify-center gap-1">
+                      ⬇ Save
+                    </a>
+                  </div>
+                </div>
+
+                <!-- KHR QR Card -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-center flex flex-col items-center">
+                  <div class="flex items-center justify-between w-full mb-2">
+                    <span class="text-xs font-bold text-slate-800">KHR Currency</span>
+                    <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Khmer Riel</span>
+                  </div>
+
+                  <div class="qr-canvas-box w-44 mb-2 cursor-pointer hover:border-brand-400 transition group relative" onclick="openLightbox('https://savongeducation.org/images/qr-khmer.jpg', 'KHQR Donation (Khmer Riel)')">
+                    <img 
+                      src="https://savongeducation.org/images/qr-khmer.jpg" 
+                      alt="Savong KHQR Khmer Riel"
+                      onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Savong-Education-KHR';"
+                    />
+                    <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center text-xs font-bold text-slate-900 bg-white/70 backdrop-blur-[1px]">
+                      Tap to enlarge
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2 w-full mt-auto">
+                    <button type="button" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-white border border-slate-200 rounded-lg hover:border-brand-500 hover:text-brand-700 transition" onclick="openLightbox('https://savongeducation.org/images/qr-khmer.jpg', 'KHQR Donation (Khmer Riel)')">
+                      🔍 Enlarge
+                    </button>
+                    <a href="https://savongeducation.org/images/qr-khmer.jpg" download="Savong-KHQR-KHR.jpg" target="_blank" rel="noopener" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg hover:bg-brand-100 transition flex items-center justify-center gap-1">
+                      ⬇ Save
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Merchant info row -->
+              <div class="bg-slate-100/70 rounded-lg p-3 text-xs flex flex-wrap items-center justify-between gap-2">
+                <span class="text-slate-600">Merchant: <strong>Savong Organization Cam.</strong> (ACLEDA)</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-slate-500">ID: <strong>18780473</strong></span>
+                  <button type="button" class="px-2 py-0.5 bg-white border border-slate-200 rounded font-semibold text-brand-700 hover:border-brand-500 transition" onclick="copyText('18780473', 'Merchant ID copied!')">Copy</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 3: PAYPAL -->
+            <div id="method-panel-paypal" class="hidden space-y-4">
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-center space-y-3">
+                <div class="w-12 h-12 rounded-full bg-[#003087]/10 text-[#003087] flex items-center justify-center mx-auto">
+                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.825a1.98 1.98 0 0 0-1.96 1.676l-1.32 8.354a.641.641 0 0 0 .633.74h3.68a1.12 1.12 0 0 0 1.107-.944l.457-2.9c.084-.518.527-.9 1.052-.9h.663c4.298 0 7.664-1.747 8.647-6.797.412-2.12.157-3.9-.562-5.024z"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 text-sm">PayPal Pool Fund</h3>
+                  <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1">
+                    Donate in any currency directly with your PayPal account or via credit card guest checkout.
+                  </p>
+                </div>
+
+                <a 
+                  href="https://www.paypal.com/pool/9nY6KF1l3C?sr=wccr" 
+                  target="_blank" 
+                  rel="noopener"
+                  class="inline-flex items-center justify-center gap-2 bg-[#003087] hover:bg-[#001f5c] text-white font-bold py-3 px-6 rounded-xl shadow transition text-sm w-full max-w-xs"
+                >
+                  <span>Continue to PayPal Pool</span>
+                  <span>→</span>
+                </a>
+                <p class="text-[11px] text-slate-400">Recipient is listed under <strong>Savong Organization Cambodia</strong>.</p>
+              </div>
+            </div>
+
+            <!-- PANEL 4: BANK WIRE (SWIFT / ACLEDA) -->
+            <div id="method-panel-bank" class="hidden space-y-3">
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs space-y-2.5">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                  <span class="text-slate-500">Beneficiary Name</span>
+                  <strong class="text-slate-900">Savong Organization Cambodia</strong>
+                </div>
+
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                  <span class="text-slate-500">Account Number (USD)</span>
+                  <div class="flex items-center gap-2">
+                    <strong class="font-mono text-slate-900 font-bold">0100-20821958-18</strong>
+                    <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition" onclick="copyText('0100-20821958-18', 'Account number copied!')">Copy</button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                  <span class="text-slate-500">SWIFT / BIC</span>
+                  <div class="flex items-center gap-2">
+                    <strong class="font-mono text-slate-900 font-bold">ACLBKHPP</strong>
+                    <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition" onclick="copyText('ACLBKHPP', 'SWIFT code copied!')">Copy</button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+                  <span class="text-slate-500">Bank Name</span>
+                  <span class="font-medium text-slate-800">ACLEDA Bank Plc. (Headquarters)</span>
+                </div>
+
+                <div class="text-[11px] text-slate-500 pt-1 leading-relaxed">
+                  <strong>Bank Address:</strong> Building No. 61, Preah Monivong Blvd., Sangkat Srah Chak, Khan Doun Penh, Phnom Penh, Cambodia.<br />
+                  <em>Note: Please include <strong>Your Name + Donation</strong> in the transfer reference.</em>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
-      <!-- Thank you card -->
-      <div class="thankyou-card">
-        <h3>Thank You For Your Generosity!</h3>
-        <p>We are constantly amazed at the incredible support from people like you. From everybody at Savong Education — thank you!</p>
-        <p>If you have any questions before donating, please contact us — we are always happy to help clarify anything.</p>
-        <a href="https://t.me/vongsvay" class="contact-btn">Contact Us →</a>
+      <!-- RIGHT: TRANSPARENCY & IMPACT SIDEBAR (5 COLS) -->
+      <aside class="lg:col-span-5 space-y-4">
+        
+        <!-- Breakdown Card -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Where your contribution goes
+          </h2>
+          <ul class="text-xs space-y-2 text-slate-600">
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
+              <span><strong>Local Teachers & Tutors:</strong> Everyday classroom instruction in English, math & computers.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
+              <span><strong>Learning Supplies:</strong> Free books, pens, notebooks & study materials for every student.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
+              <span><strong>School Operations:</strong> Electricity, clean drinking water, hygiene supplies & basic repairs.</span>
+            </li>
+            <li class="flex items-start gap-2 text-slate-500">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 shrink-0"></span>
+              <span><strong>0% Overhead:</strong> No foreign marketing agencies or executive management cuts.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Direct Contact Card with Vong Svay -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h2 class="font-bold text-slate-900 text-sm">Questions? Talk with us</h2>
+            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Directly in Siem Reap</span>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            We are a small, local Cambodian team and happy to confirm transactions or provide receipts anytime.
+          </p>
+
+          <div class="space-y-2 pt-1">
+            <!-- WhatsApp Link -->
+            <a 
+              href="https://wa.me/855976414414" 
+              target="_blank" 
+              rel="noopener"
+              class="flex items-center justify-between p-2.5 bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/80 rounded-xl transition text-emerald-900 text-xs font-semibold group"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 fill-current text-emerald-600" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.091.535 4.06 1.47 5.773L.026 23.99l6.376-1.426A11.934 11.934 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 0 1-5.006-1.372l-.359-.213-3.722.832.881-3.626-.234-.372A9.78 9.78 0 0 1 2.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                <span>WhatsApp: Vong Svay (+855 0976414414)</span>
+              </span>
+              <span class="text-emerald-700 group-hover:translate-x-0.5 transition">→</span>
+            </a>
+
+            <!-- Telegram Link -->
+            <a 
+              href="https://t.me/vongsvay" 
+              target="_blank" 
+              rel="noopener"
+              class="flex items-center justify-between p-2.5 bg-sky-50/70 hover:bg-sky-100/70 border border-sky-200/80 rounded-xl transition text-sky-900 text-xs font-semibold group"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 fill-current text-sky-500" viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 6.742c-1.356.554-1.348 1.325-.247 1.668l4.236 1.322 9.834-6.204c.463-.282.887-.13.539.18l-7.97 7.196-.303 4.548c.443 0 .639-.202.883-.44l2.12-2.063 4.406 3.26c.812.45 1.395.218 1.598-.754l2.895-13.644c.297-1.19-.454-1.73-1.469-1.031z"/></svg>
+                <span>Telegram: @vongsvay</span>
+              </span>
+              <span class="text-sky-700 group-hover:translate-x-0.5 transition">→</span>
+            </a>
+
+            <!-- Email Link -->
+            <a 
+              href="mailto:care@savongeducation.org" 
+              class="flex items-center justify-between p-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition text-slate-800 text-xs font-semibold group"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span>care@savongeducation.org</span>
+              </span>
+              <span class="text-slate-600 group-hover:translate-x-0.5 transition">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- FAQ Dropdowns (Compact) -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-2">
+          <details class="group text-xs">
+            <summary class="font-semibold text-slate-700 cursor-pointer flex justify-between items-center list-none py-1">
+              <span>Can I cancel recurring monthly gifts?</span>
+              <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+            </summary>
+            <p class="text-slate-500 pt-1 pb-1 leading-relaxed">
+              Yes, anytime. Donorbox immediately emails you a secure donor portal link where you can pause, modify, or cancel recurring gifts with one click.
+            </p>
+          </details>
+          <details class="group text-xs border-t border-slate-100 pt-2">
+            <summary class="font-semibold text-slate-700 cursor-pointer flex justify-between items-center list-none py-1">
+              <span>Will I get a tax or payment receipt?</span>
+              <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+            </summary>
+            <p class="text-slate-500 pt-1 pb-1 leading-relaxed">
+              Donorbox and PayPal automatically issue official digital receipts. For KHQR or bank wire transfers, message us on WhatsApp and we will immediately provide a signed receipt.
+            </p>
+          </details>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- LIGHTBOX MODAL (For QR enlargement) -->
+  <div id="qr-modal" class="lightbox-modal hidden-modal fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl relative">
+      <button type="button" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 p-1 text-lg leading-none" onclick="closeLightbox()">&times;</button>
+      
+      <div class="space-y-1">
+        <h3 id="modal-title" class="font-bold text-slate-900 text-base">KHQR Code</h3>
+        <p class="text-xs text-slate-500">Scan with ABA, ACLEDA, Bakong, or Wing</p>
       </div>
 
+      <div class="bg-white p-3 border border-slate-200 rounded-xl shadow-inner max-w-[240px] mx-auto">
+        <img id="modal-img" src="" alt="Enlarged QR code" class="w-full aspect-square object-contain" />
+      </div>
+
+      <div class="flex gap-2">
+        <a id="modal-download" href="#" download="" target="_blank" rel="noopener" class="w-full py-2 px-3 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-lg transition flex items-center justify-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Save to Photos
+        </a>
+        <button type="button" class="py-2 px-3 border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-semibold rounded-lg transition" onclick="closeLightbox()">
+          Close
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- FOOTER — identical to main site -->
-<footer>
-  <div class="footer-minimal">
-    <span>
-      © 2026 Savong Organization Cambodia. All rights reserved.
-      <span class="footer-ngo">NGO Registration No. 1372</span>
-    </span>
-    <div class="footer-socials">
-      <a href="https://web.facebook.com/Savongeducation" target="_blank" rel="noopener" class="fsoc fsoc-fb" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a href="https://t.me/vongsvay" target="_blank" rel="noopener" class="fsoc fsoc-tg" aria-label="Telegram">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 6.742c-1.356.554-1.348 1.325-.247 1.668l4.236 1.322 9.834-6.204c.463-.282.887-.13.539.18l-7.97 7.196-.303 4.548c.443 0 .639-.202.883-.44l2.12-2.063 4.406 3.26c.812.45 1.395.218 1.598-.754l2.895-13.644c.297-1.19-.454-1.73-1.469-1.031z"/></svg>
-      </a>
-      <a href="https://wa.me/85512345678" target="_blank" rel="noopener" class="fsoc fsoc-wa" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.091.535 4.06 1.47 5.773L.026 23.99l6.376-1.426A11.934 11.934 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 0 1-5.006-1.372l-.359-.213-3.722.832.881-3.626-.234-.372A9.78 9.78 0 0 1 2.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
-      </a>
-    </div>
+  <!-- NON-INTRUSIVE TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 pointer-events-none transition-all duration-300 opacity-0 translate-y-4">
+    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+    <span id="toast-text">Copied to clipboard</span>
   </div>
-</footer>
 
-<script>
-  // Nav scroll shrink — identical to main site
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-</script>
+  <!-- COMPACT FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <p class="text-slate-300 font-semibold">Savong Organization Cambodia</p>
+        <p class="text-slate-500 text-[11px] mt-0.5">Registered Non-Governmental Organization (NGO No. 1372) · Siem Reap, Cambodia</p>
+      </div>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="https://savongeducation.org/" class="hover:text-white transition">Main Website</a>
+        <span>·</span>
+        <a href="https://web.facebook.com/Savongeducation" target="_blank" rel="noopener" class="hover:text-white transition">Facebook</a>
+        <span>·</span>
+        <a href="https://wa.me/855976414414" target="_blank" rel="noopener" class="hover:text-white transition">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
 
+  <!-- CLIENT INTERACTION SCRIPT -->
+  <script>
+    // State
+    let currentFrequency = 'monthly'; // 'monthly' | 'once'
+    let currentAmount = 25;
+    const STRIPE_BASE_URL = "https://buy.stripe.com/bJe9AT8XV8OV3mW0ejcQU00";
+
+    const IMPACT_TIERS = {
+      5: "School supplies, pencils & notebooks for one student",
+      10: "Weekly tutoring & homework support for one child",
+      25: "Full student learning programme & English classes",
+      50: "Comprehensive sponsorship: tuition, supplies & mentoring"
+    };
+
+    function setFrequency(freq) {
+      currentFrequency = freq;
+      const btnMonthly = document.getElementById('btn-freq-monthly');
+      const btnOnce = document.getElementById('btn-freq-once');
+      
+      if (freq === 'monthly') {
+        btnMonthly.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
+        btnOnce.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
+      } else {
+        btnOnce.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
+        btnMonthly.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
+      }
+      updateSummary();
+    }
+
+    function selectTier(amt) {
+      currentAmount = amt;
+      const customInput = document.getElementById('custom-amount');
+      if (customInput) customInput.value = '';
+
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        const btnAmt = parseInt(btn.dataset.amt, 10);
+        if (btnAmt === amt) {
+          btn.className = 'tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-brand-600 bg-brand-50/80 text-brand-700 ring-2 ring-brand-500/20';
+        } else {
+          btn.className = 'tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700';
+        }
+      });
+
+      const impactEl = document.getElementById('impact-pill');
+      if (impactEl) {
+        impactEl.textContent = IMPACT_TIERS[amt] || "Supports rural education in Siem Reap";
+      }
+
+      updateSummary();
+    }
+
+    function onCustomAmountChange(val) {
+      const parsed = parseFloat(val);
+      if (!isNaN(parsed) && parsed > 0) {
+        currentAmount = parsed;
+        document.querySelectorAll('.tier-btn').forEach(btn => {
+          btn.className = 'tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700';
+        });
+        const impactEl = document.getElementById('impact-pill');
+        if (impactEl) impactEl.textContent = `Custom gift of $${parsed} to the school`;
+        updateSummary();
+      }
+    }
+
+    function updateSummary() {
+      const summaryAmount = document.getElementById('stripe-summary-amount');
+      const stripeBtnLabel = document.getElementById('stripe-btn-label');
+      const freqText = currentFrequency === 'monthly' ? '/ month' : 'one-time';
+
+      if (summaryAmount) {
+        summaryAmount.textContent = `$${currentAmount} ${freqText}`;
+      }
+      if (stripeBtnLabel) {
+        stripeBtnLabel.textContent = `Give $${currentAmount} on Stripe`;
+      }
+    }
+
+    function switchMethod(methodKey) {
+      const tabs = ['card', 'khqr', 'paypal', 'bank'];
+      tabs.forEach(k => {
+        const btn = document.getElementById(`tab-btn-${k}`);
+        const panel = document.getElementById(`method-panel-${k}`);
+        
+        if (k === methodKey) {
+          if (btn) btn.className = 'pay-tab-btn py-2 px-1 rounded-lg bg-white text-brand-700 shadow-sm transition flex flex-col items-center justify-center gap-0.5';
+          if (panel) panel.classList.remove('hidden');
+        } else {
+          if (btn) btn.className = 'pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5';
+          if (panel) panel.classList.add('hidden');
+        }
+      });
+    }
+
+    // Modal QR Controls
+    function openLightbox(imgSrc, title) {
+      const modal = document.getElementById('qr-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDl = document.getElementById('modal-download');
+      
+      if (!modal || !modalImg) return;
+      modalImg.src = imgSrc;
+      if (modalTitle) modalTitle.textContent = title || 'KHQR Code';
+      if (modalDl) {
+        modalDl.href = imgSrc;
+        modalDl.download = (title || 'Savong-KHQR').replace(/\s+/g, '-') + '.jpg';
+      }
+
+      modal.classList.remove('hidden-modal');
+      modal.classList.add('active-modal');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('qr-modal');
+      if (!modal) return;
+      modal.classList.remove('active-modal');
+      modal.classList.add('hidden-modal');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Copy to clipboard helper
+    function copyText(text, successMessage) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        showToast(successMessage || 'Copied to clipboard');
+      } catch (err) {
+        showToast('Please copy manually');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      if (!toast || !toastText) return;
+      
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-4');
+      }, 2200);
+    }
+  </script>
 </body>
 </html>

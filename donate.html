@@ -48,7 +48,7 @@
       outline-offset: 2px;
     }
     
-    /* QR code scan-optimized container */
+    /* QR code scan-optimized container (1:1 aspect ratio with white quiet zone) */
     .qr-canvas-box {
       background: #ffffff;
       padding: 12px;
@@ -68,7 +68,7 @@
       image-rendering: crisp-edges;
     }
 
-    /* Modal transition */
+    /* Lightbox Modal Animation */
     .lightbox-modal {
       transition: opacity 0.2s ease, visibility 0.2s ease;
     }
@@ -177,7 +177,7 @@
           <!-- 1. Amount Selector -->
           <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-slate-700 tracking-wider uppercase">1. Select Amount</label>
+              <label class="text-xs font-bold text-slate-700 tracking-wider uppercase">1. Suggested Gift Tiers</label>
               <span id="impact-pill" class="text-xs font-medium text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-0.5 rounded-full">
                 Full student learning programme
               </span>
@@ -268,7 +268,7 @@
                 </dbox-widget>
               </div>
 
-              <!-- Express 1-Click Direct Stripe Fallback -->
+              <!-- Express 1-Click Direct Stripe Link -->
               <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-600">
                 <div class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-[#635bff] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -397,20 +397,20 @@
             <div id="method-panel-bank" class="hidden space-y-3">
               <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs space-y-2.5">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200">
-                  <span class="text-slate-500">Beneficiary Name</span>
+                  <span class="text-slate-500">Beneficiary Customer</span>
                   <strong class="text-slate-900">Savong Organization Cambodia</strong>
                 </div>
 
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200">
                   <span class="text-slate-500">Account Number (USD)</span>
                   <div class="flex items-center gap-2">
-                    <strong class="font-mono text-slate-900 font-bold">0100-20821958-18</strong>
+                    <strong class="font-mono text-slate-900 font-bold text-sm">0100-20821958-18</strong>
                     <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition" onclick="copyText('0100-20821958-18', 'Account number copied!')">Copy</button>
                   </div>
                 </div>
 
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200">
-                  <span class="text-slate-500">SWIFT / BIC</span>
+                  <span class="text-slate-500">SWIFT / BIC Code</span>
                   <div class="flex items-center gap-2">
                     <strong class="font-mono text-slate-900 font-bold">ACLBKHPP</strong>
                     <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition" onclick="copyText('ACLBKHPP', 'SWIFT code copied!')">Copy</button>
@@ -424,7 +424,7 @@
 
                 <div class="text-[11px] text-slate-500 pt-1 leading-relaxed">
                   <strong>Bank Address:</strong> Building No. 61, Preah Monivong Blvd., Sangkat Srah Chak, Khan Doun Penh, Phnom Penh, Cambodia.<br />
-                  <em>Note: Please include <strong>Your Name + Donation</strong> in the transfer reference.</em>
+                  <em>Note: Please include <strong>Your Name + Donation</strong> in the wire transfer reference.</em>
                 </div>
               </div>
             </div>
@@ -502,6 +502,20 @@
               <span class="text-sky-700 group-hover:translate-x-0.5 transition">→</span>
             </a>
 
+            <!-- Facebook Link -->
+            <a 
+              href="https://www.facebook.com/Savongeducation" 
+              target="_blank" 
+              rel="noopener"
+              class="flex items-center justify-between p-2.5 bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/80 rounded-xl transition text-blue-900 text-xs font-semibold group"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 fill-current text-[#1877f2]" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>Facebook: Savong Education</span>
+              </span>
+              <span class="text-blue-700 group-hover:translate-x-0.5 transition">→</span>
+            </a>
+
             <!-- Email Link -->
             <a 
               href="mailto:care@savongeducation.org" 
@@ -516,7 +530,7 @@
           </div>
         </div>
 
-        <!-- FAQ Dropdowns (Compact) -->
+        <!-- FAQ Dropdowns -->
         <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-2">
           <details class="group text-xs">
             <summary class="font-semibold text-slate-700 cursor-pointer flex justify-between items-center list-none py-1">
@@ -575,7 +589,7 @@
     <span id="toast-text">Copied to clipboard</span>
   </div>
 
-  <!-- COMPACT FOOTER -->
+  <!-- FOOTER -->
   <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
       <div>
@@ -585,7 +599,7 @@
       <div class="flex items-center gap-4 text-slate-400">
         <a href="https://savongeducation.org/" class="hover:text-white transition">Main Website</a>
         <span>·</span>
-        <a href="https://web.facebook.com/Savongeducation" target="_blank" rel="noopener" class="hover:text-white transition">Facebook</a>
+        <a href="https://www.facebook.com/Savongeducation" target="_blank" rel="noopener" class="hover:text-white transition">Facebook</a>
         <span>·</span>
         <a href="https://wa.me/855976414414" target="_blank" rel="noopener" class="hover:text-white transition">WhatsApp</a>
       </div>
@@ -597,7 +611,6 @@
     // State
     let currentFrequency = 'monthly'; // 'monthly' | 'once'
     let currentAmount = 25;
-    const STRIPE_BASE_URL = "https://buy.stripe.com/bJe9AT8XV8OV3mW0ejcQU00";
 
     const IMPACT_TIERS = {
       5: "School supplies, pencils & notebooks for one student",
@@ -618,7 +631,6 @@
         btnOnce.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
         btnMonthly.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
       }
-      updateSummary();
     }
 
     function selectTier(amt) {
@@ -639,8 +651,6 @@
       if (impactEl) {
         impactEl.textContent = IMPACT_TIERS[amt] || "Supports rural education in Siem Reap";
       }
-
-      updateSummary();
     }
 
     function onCustomAmountChange(val) {
@@ -652,20 +662,6 @@
         });
         const impactEl = document.getElementById('impact-pill');
         if (impactEl) impactEl.textContent = `Custom gift of $${parsed} to the school`;
-        updateSummary();
-      }
-    }
-
-    function updateSummary() {
-      const summaryAmount = document.getElementById('stripe-summary-amount');
-      const stripeBtnLabel = document.getElementById('stripe-btn-label');
-      const freqText = currentFrequency === 'monthly' ? '/ month' : 'one-time';
-
-      if (summaryAmount) {
-        summaryAmount.textContent = `$${currentAmount} ${freqText}`;
-      }
-      if (stripeBtnLabel) {
-        stripeBtnLabel.textContent = `Give $${currentAmount} on Stripe`;
       }
     }
 

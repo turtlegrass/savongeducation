@@ -2,26 +2,25 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CJK94QV3R5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CJK94QV3R5');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJK94QV3R5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CJK94QV3R5');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Donate to Savong Education Bakong — Second Rural Campus, Siem Reap</title>
-  <meta name="description" content="Support Savong Education Bakong, a second rural campus in Prasat Bakong, Siem Reap. Give securely by Card, Apple Pay, Google Pay, KHQR (Bakong/ABA/ACLEDA), PayPal, or bank wire." />
-  
+  <title>Donate to Savong Education Bakong | Siem Reap, Cambodia</title>
+  <meta name="description" content="Support Savong Education Bakong in Siem Reap, Cambodia. Give securely by Card, Apple Pay, Google Pay, KHQR (Bakong/ABA/ACLEDA), PayPal, or bank wire." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Donorbox Official Widget Library -->
   <script type="module" src="https://donorbox.org/widgets.js" async></script>
-  
+
   <script>
     tailwind.config = {
       theme: {
@@ -34,12 +33,16 @@
             brand: {
               50:  '#f0f9ff',
               100: '#e0f2fe',
+              200: '#bae6fd',
               500: '#0284c7',
               600: '#0369a1',
               700: '#075985',
-              900: '#0c4a6e',
+              800: '#0c4a6e',
+              900: '#082f49',
+              950: '#031a2a',
             },
             accent: {
+              300: '#fde047',
               400: '#fbbf24',
               500: '#f59e0b',
               600: '#d97706',
@@ -55,19 +58,21 @@
       outline: 2px solid #0284c7;
       outline-offset: 2px;
     }
-    
-    .qr-canvas-box {
+
+    /* Un-squished QR Card Container preserving original ACLEDA card ratio */
+    .qr-card-container {
       background: #ffffff;
-      padding: 12px;
-      border-radius: 12px;
+      padding: 8px;
+      border-radius: 16px;
       border: 1px solid #e2e8f0;
       display: flex;
       align-items: center;
       justify-content: center;
-      aspect-ratio: 1 / 1;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      aspect-ratio: 9 / 14;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      overflow: hidden;
     }
-    .qr-canvas-box img {
+    .qr-card-container img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -75,6 +80,7 @@
       image-rendering: crisp-edges;
     }
 
+    /* Lightbox Modal */
     .lightbox-modal {
       transition: opacity 0.2s ease, visibility 0.2s ease;
     }
@@ -94,30 +100,38 @@
 
   <!-- HEADER / NAVIGATION -->
   <header class="sticky top-0 z-50 bg-brand-700/95 backdrop-blur-md border-b border-white/10 text-white shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-      <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-full bg-white p-0.5 overflow-hidden ring-2 ring-white/30 shrink-0">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-3 min-w-0 group">
+        <div class="w-10 h-10 rounded-full bg-white p-0.5 overflow-hidden ring-2 ring-white/30 shrink-0 shadow-sm">
           <img 
             src="SOC-Logo (1).jpg" 
             alt="Savong Organization Cambodia" 
             class="w-full h-full object-cover rounded-full"
-            onerror="this.onerror=null; this.src='https://savongeducation.org/images/logo-new.png';"
+            onerror="
+              if (!this.dataset.step) {
+                this.dataset.step = '1';
+                this.src = 'images/SOC-Logo (1).jpg';
+              } else {
+                this.onerror = null;
+                this.src = 'https://savongeducation.org/images/logo-new.png';
+              }
+            "
           />
         </div>
-        <div class="leading-tight">
-          <div class="font-bold text-sm sm:text-base tracking-tight flex items-center gap-2">
-            Savong Education Bakong
-            <span class="hidden sm:inline-block text-[10px] font-semibold tracking-wider uppercase bg-white/15 px-2 py-0.5 rounded text-sky-100">2nd Campus · NGO #1372</span>
+        <div class="leading-tight min-w-0">
+          <div class="font-bold text-sm sm:text-base tracking-tight truncate flex items-center gap-2">
+            <span>Savong Education Bakong</span>
+            <span class="hidden sm:inline-block text-[10px] font-semibold tracking-wider uppercase bg-white/15 px-2 py-0.5 rounded text-sky-100">NGO #1372</span>
           </div>
-          <p class="text-xs text-sky-200 font-medium hidden xs:block">Second Rural Location · Prasat Bakong, Siem Reap</p>
+          <p class="text-xs text-sky-200 font-medium truncate">Prasat Bakong · Siem Reap, Cambodia</p>
         </div>
       </a>
 
-      <div class="flex items-center gap-3 sm:gap-4">
+      <div class="flex items-center gap-3 sm:gap-4 shrink-0">
         <a href="index.html" class="text-xs sm:text-sm font-medium text-sky-100 hover:text-white transition">
           ← Main Site
         </a>
-        <a href="#donate-widget" class="bg-accent-500 hover:bg-accent-400 active:scale-95 text-slate-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-lg shadow transition flex items-center gap-1.5">
+        <a href="#donate-widget" class="bg-accent-500 hover:bg-accent-400 active:scale-95 text-slate-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow-md transition flex items-center gap-1.5">
           <span>Give Now</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </a>
@@ -126,33 +140,35 @@
   </header>
 
   <!-- HERO HEADLINE & TRUST BAR -->
-  <section class="bg-gradient-to-b from-brand-700 to-brand-900 text-white pt-10 pb-16 px-4 text-center">
+  <section class="bg-gradient-to-b from-brand-700 to-brand-900 text-white pt-8 pb-14 sm:pt-10 sm:pb-16 px-4 text-center">
     <div class="max-w-3xl mx-auto space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold tracking-wide uppercase">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-semibold uppercase border border-white/10">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Second Rural Campus · Prasat Bakong · 100% Free School
+        100% Free Community Education · Siem Reap
       </div>
-      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight">
-        Support our rural Bakong campus <br class="hidden sm:inline" />
+      <h1 class="font-serif text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white leading-tight">
+        Support our students in Bakong <br class="hidden sm:inline" />
         <span class="italic text-accent-400 font-normal">from just $5 a month.</span>
       </h1>
-      <p class="text-sky-100/90 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-        Savong Education Bakong provides free daily English classes, school supplies, sports, and life skills for over 200 children in remote villages outside Siem Reap City.
+      <p class="text-sky-100/90 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        Providing free daily English classes, school supplies, athletics, and digital literacy for over 200 children in rural Siem Reap.
       </p>
       
       <!-- Trust badges row -->
-      <div class="pt-3 flex flex-wrap justify-center items-center gap-y-2 gap-x-6 text-xs text-sky-200">
+      <div class="pt-3 flex flex-wrap justify-center items-center gap-y-2 gap-x-5 text-xs text-sky-200">
         <span class="flex items-center gap-1.5">
           <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           Registered NGO (#1372)
         </span>
+        <span>·</span>
         <span class="flex items-center gap-1.5">
           <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           Zero CEO / Overseas Salaries
         </span>
+        <span>·</span>
         <span class="flex items-center gap-1.5">
           <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-          100% Funds Bakong Classroom Floor
+          100% Funds Classroom Floor
         </span>
       </div>
     </div>
@@ -160,13 +176,13 @@
 
   <!-- MAIN DONATION APPARATUS -->
   <main class="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 pb-16 flex-1 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
       <!-- LEFT: THE DONATION CARD (7 COLS) -->
-      <div id="donate-widget" class="lg:col-span-7 bg-white rounded-2xl shadow-xl shadow-slate-900/10 border border-slate-200/90 overflow-hidden">
+      <div id="donate-widget" class="lg:col-span-7 bg-white rounded-2xl shadow-xl shadow-slate-900/10 border border-slate-200 overflow-hidden">
         
-        <!-- Frequency Segmented Switch -->
-        <div class="p-4 sm:p-5 bg-slate-50 border-b border-slate-200">
+        <!-- Frequency Toggle -->
+        <div class="p-3.5 sm:p-4 bg-slate-50 border-b border-slate-200">
           <div class="flex rounded-xl bg-slate-200/80 p-1 font-semibold text-xs sm:text-sm">
             <button type="button" id="btn-freq-monthly" class="flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5" onclick="setFrequency('monthly')">
               <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
@@ -178,66 +194,66 @@
           </div>
         </div>
 
-        <div class="p-5 sm:p-7 space-y-6">
+        <div class="p-4 sm:p-6 space-y-5">
 
           <!-- 1. Amount Selector -->
-          <div class="space-y-3">
+          <div class="space-y-2.5">
             <div class="flex items-center justify-between">
               <label class="text-xs font-bold text-slate-700 tracking-wider uppercase">1. Suggested Gift Tiers</label>
-              <span id="impact-pill" class="text-xs font-medium text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-0.5 rounded-full">
+              <span id="impact-pill" class="text-[11px] sm:text-xs font-medium text-brand-600 bg-brand-50 border border-brand-100 px-2.5 py-0.5 rounded-full truncate max-w-[210px] sm:max-w-none">
                 Full student learning programme in Bakong
               </span>
             </div>
 
-            <!-- Pre-set Tier Buttons -->
+            <!-- Tier Buttons -->
             <div class="grid grid-cols-4 gap-2">
-              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700" data-amt="5" onclick="selectTier(5)">
+              <button type="button" class="tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 text-slate-700 hover:border-brand-500" data-amt="5" onclick="selectTier(5)">
                 $5
               </button>
-              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700" data-amt="10" onclick="selectTier(10)">
+              <button type="button" class="tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 text-slate-700 hover:border-brand-500" data-amt="10" onclick="selectTier(10)">
                 $10
               </button>
-              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-brand-600 bg-brand-50/80 text-brand-700 ring-2 ring-brand-500/20" data-amt="25" onclick="selectTier(25)">
+              <button type="button" class="tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-brand-600 bg-brand-50/80 text-brand-700 ring-2 ring-brand-500/20" data-amt="25" onclick="selectTier(25)">
                 $25
               </button>
-              <button type="button" class="tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700" data-amt="50" onclick="selectTier(50)">
+              <button type="button" class="tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 text-slate-700 hover:border-brand-500" data-amt="50" onclick="selectTier(50)">
                 $50
               </button>
             </div>
 
             <!-- Custom Amount Option -->
             <div class="relative flex items-center">
-              <span class="absolute left-3.5 text-slate-400 font-bold text-sm">$</span>
+              <span class="absolute left-3 text-slate-400 font-bold text-sm">$</span>
               <input 
                 type="number" 
                 id="custom-amount" 
                 placeholder="Or enter custom USD amount" 
                 min="1"
-                class="w-full pl-8 pr-4 py-2.5 bg-slate-50 hover:bg-white focus:bg-white text-sm font-semibold rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition outline-none"
+                class="w-full pl-7 pr-3 py-2 bg-slate-50 hover:bg-white focus:bg-white text-sm font-semibold rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition outline-none"
                 oninput="onCustomAmountChange(this.value)"
               />
             </div>
           </div>
 
-          <!-- 2. Payment Method Selector Tabs -->
-          <div class="space-y-3 pt-2">
+          <!-- 2. Payment Method Selector Tabs (Responsive Grid for Mobile) -->
+          <div class="space-y-2.5 pt-1">
             <label class="text-xs font-bold text-slate-700 tracking-wider uppercase block">2. Select Payment Method</label>
             
-            <div class="grid grid-cols-4 gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
-              <button type="button" id="tab-btn-card" class="pay-tab-btn py-2 px-1 rounded-lg bg-white text-brand-700 shadow-sm transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('card')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 bg-slate-100 p-1.5 rounded-xl text-xs font-semibold">
+              <button type="button" id="tab-btn-card" class="pay-tab-btn py-2.5 px-2 rounded-lg bg-white text-brand-700 shadow-sm transition flex items-center justify-center gap-1.5" onclick="switchMethod('card')">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                 <span>Card · Donorbox</span>
               </button>
-              <button type="button" id="tab-btn-khqr" class="pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('khqr')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
-                <span>KHQR</span>
+              <button type="button" id="tab-btn-khqr" class="pay-tab-btn py-2.5 px-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5" onclick="switchMethod('khqr')">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                <span>KHQR (Cam)</span>
               </button>
-              <button type="button" id="tab-btn-paypal" class="pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('paypal')">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.825a1.98 1.98 0 0 0-1.96 1.676l-1.32 8.354a.641.641 0 0 0 .633.74h3.68a1.12 1.12 0 0 0 1.107-.944l.457-2.9c.084-.518.527-.9 1.052-.9h.663c4.298 0 7.664-1.747 8.647-6.797.412-2.12.157-3.9-.562-5.024z"/></svg>
+              <button type="button" id="tab-btn-paypal" class="pay-tab-btn py-2.5 px-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5" onclick="switchMethod('paypal')">
+                <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.825a1.98 1.98 0 0 0-1.96 1.676l-1.32 8.354a.641.641 0 0 0 .633.74h3.68a1.12 1.12 0 0 0 1.107-.944l.457-2.9c.084-.518.527-.9 1.052-.9h.663c4.298 0 7.664-1.747 8.647-6.797.412-2.12.157-3.9-.562-5.024z"/></svg>
                 <span>PayPal</span>
               </button>
-              <button type="button" id="tab-btn-bank" class="pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5" onclick="switchMethod('bank')">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              <button type="button" id="tab-btn-bank" class="pay-tab-btn py-2.5 px-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5" onclick="switchMethod('bank')">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                 <span>Bank Wire</span>
               </button>
             </div>
@@ -246,14 +262,14 @@
           <!-- METHOD CONTENT PANELS -->
           <div class="border-t border-slate-100 pt-4">
 
-            <!-- PANEL 1: DONORBOX -->
+            <!-- PANEL 1: DONORBOX & STRIPE -->
             <div id="method-panel-card" class="space-y-4">
               <div class="bg-brand-50/70 border border-brand-100 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-3 text-xs">
                 <div class="flex items-center gap-2 text-brand-900 font-semibold">
                   <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                  <span>Verified Campaign for Bakong Rural Campus</span>
+                  <span>Verified Campaign · Savong Education Bakong</span>
                 </div>
-                <div class="flex items-center gap-1.5 text-slate-500 font-medium text-[11px]">
+                <div class="flex items-center gap-1 text-slate-500 font-medium text-[11px]">
                   <span>Powered by</span>
                   <span class="font-bold text-slate-800 tracking-tight flex items-center gap-1">
                     <span class="w-2 h-2 rounded-full bg-orange-500"></span> Donorbox
@@ -272,7 +288,7 @@
                 </dbox-widget>
               </div>
 
-              <!-- Express Direct Stripe Link -->
+              <!-- Express 1-Click Direct Stripe Link -->
               <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-600">
                 <div class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-[#635bff] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -282,7 +298,7 @@
                   href="https://buy.stripe.com/bJe9AT8XV8OV3mW0ejcQU00" 
                   target="_blank" 
                   rel="noopener"
-                  class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#635bff] hover:bg-[#5348eb] text-white font-semibold rounded-lg shadow-sm transition whitespace-nowrap text-xs active:scale-95"
+                  class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#635bff] hover:bg-[#5348eb] text-white font-semibold rounded-lg shadow-sm transition whitespace-nowrap text-xs active:scale-95"
                 >
                   <span>Direct Stripe Link</span>
                   <span>→</span>
@@ -295,26 +311,38 @@
               </p>
             </div>
 
-            <!-- PANEL 2: KHQR -->
+            <!-- PANEL 2: KHQR (UN-SQUISHED ACLEDA CARDS) -->
             <div id="method-panel-khqr" class="hidden space-y-4">
               <div class="bg-amber-50 border border-amber-200/80 rounded-xl p-3 text-xs text-amber-900 flex items-start gap-2">
                 <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span>Scan with <strong>ACLEDA, ABA, Wing</strong>, or any Bakong-linked Cambodian mobile banking app.</span>
+                <span>Scan with <strong>ACLEDA, ABA, Wing</strong>, or any Bakong-linked mobile banking app.</span>
               </div>
 
+              <!-- Two QR Cards (USD and KHR) -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- USD QR Card -->
-                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-center flex flex-col items-center">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-center flex flex-col items-center">
                   <div class="flex items-center justify-between w-full mb-2">
                     <span class="text-xs font-bold text-slate-800">USD Currency</span>
                     <span class="text-[10px] bg-brand-100 text-brand-800 font-bold px-1.5 py-0.5 rounded">US Dollars</span>
                   </div>
                   
-                  <div class="qr-canvas-box w-44 mb-2 cursor-pointer hover:border-brand-400 transition group relative" onclick="openLightbox('https://savongeducation.org/images/qr-usd.jpg', 'KHQR Donation (USD)')">
+                  <div class="qr-card-container w-48 mb-2 cursor-pointer hover:border-brand-400 transition group relative" onclick="openLightbox('image_5b3222.png', 'KHQR Donation (USD)')">
                     <img 
-                      src="https://savongeducation.org/images/qr-usd.jpg" 
+                      src="image_5b3222.png" 
                       alt="Savong KHQR USD"
-                      onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Savong-Education-USD';"
+                      onerror="
+                        if (!this.dataset.step) {
+                          this.dataset.step = '1';
+                          this.src = 'images/image_5b3222.png';
+                        } else if (this.dataset.step === '1') {
+                          this.dataset.step = '2';
+                          this.src = 'images/qr-usd.jpg';
+                        } else {
+                          this.onerror = null;
+                          this.src = 'https://savongeducation.org/images/qr-usd.jpg';
+                        }
+                      "
                     />
                     <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center text-xs font-bold text-slate-900 bg-white/70 backdrop-blur-[1px]">
                       Tap to enlarge
@@ -322,27 +350,38 @@
                   </div>
 
                   <div class="flex gap-2 w-full mt-auto">
-                    <button type="button" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-white border border-slate-200 rounded-lg hover:border-brand-500 hover:text-brand-700 transition" onclick="openLightbox('https://savongeducation.org/images/qr-usd.jpg', 'KHQR Donation (USD)')">
+                    <button type="button" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-white border border-slate-200 rounded-lg hover:border-brand-500 hover:text-brand-700 transition" onclick="openLightbox('image_5b3222.png', 'KHQR Donation (USD)')">
                       🔍 Enlarge
                     </button>
-                    <a href="https://savongeducation.org/images/qr-usd.jpg" download="Savong-KHQR-USD.jpg" target="_blank" rel="noopener" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg hover:bg-brand-100 transition flex items-center justify-center gap-1">
+                    <a href="image_5b3222.png" download="Savong-KHQR-USD.png" target="_blank" rel="noopener" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg hover:bg-brand-100 transition flex items-center justify-center gap-1">
                       ⬇ Save
                     </a>
                   </div>
                 </div>
 
                 <!-- KHR QR Card -->
-                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-center flex flex-col items-center">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-center flex flex-col items-center">
                   <div class="flex items-center justify-between w-full mb-2">
                     <span class="text-xs font-bold text-slate-800">KHR Currency</span>
                     <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded">Khmer Riel</span>
                   </div>
 
-                  <div class="qr-canvas-box w-44 mb-2 cursor-pointer hover:border-brand-400 transition group relative" onclick="openLightbox('https://savongeducation.org/images/qr-khmer.jpg', 'KHQR Donation (Khmer Riel)')">
+                  <div class="qr-card-container w-48 mb-2 cursor-pointer hover:border-brand-400 transition group relative" onclick="openLightbox('image_5b31cb.jpg', 'KHQR Donation (Khmer Riel)')">
                     <img 
-                      src="https://savongeducation.org/images/qr-khmer.jpg" 
+                      src="image_5b31cb.jpg" 
                       alt="Savong KHQR Khmer Riel"
-                      onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Savong-Education-KHR';"
+                      onerror="
+                        if (!this.dataset.step) {
+                          this.dataset.step = '1';
+                          this.src = 'images/image_5b31cb.jpg';
+                        } else if (this.dataset.step === '1') {
+                          this.dataset.step = '2';
+                          this.src = 'images/qr-khmer.jpg';
+                        } else {
+                          this.onerror = null;
+                          this.src = 'https://savongeducation.org/images/qr-khmer.jpg';
+                        }
+                      "
                     />
                     <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center text-xs font-bold text-slate-900 bg-white/70 backdrop-blur-[1px]">
                       Tap to enlarge
@@ -350,10 +389,10 @@
                   </div>
 
                   <div class="flex gap-2 w-full mt-auto">
-                    <button type="button" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-white border border-slate-200 rounded-lg hover:border-brand-500 hover:text-brand-700 transition" onclick="openLightbox('https://savongeducation.org/images/qr-khmer.jpg', 'KHQR Donation (Khmer Riel)')">
+                    <button type="button" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-white border border-slate-200 rounded-lg hover:border-brand-500 hover:text-brand-700 transition" onclick="openLightbox('image_5b31cb.jpg', 'KHQR Donation (Khmer Riel)')">
                       🔍 Enlarge
                     </button>
-                    <a href="https://savongeducation.org/images/qr-khmer.jpg" download="Savong-KHQR-KHR.jpg" target="_blank" rel="noopener" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg hover:bg-brand-100 transition flex items-center justify-center gap-1">
+                    <a href="image_5b31cb.jpg" download="Savong-KHQR-KHR.jpg" target="_blank" rel="noopener" class="flex-1 text-xs font-semibold py-1.5 px-2 bg-brand-50 border border-brand-200 text-brand-700 rounded-lg hover:bg-brand-100 transition flex items-center justify-center gap-1">
                       ⬇ Save
                     </a>
                   </div>
@@ -361,11 +400,11 @@
               </div>
 
               <!-- Merchant info row -->
-              <div class="bg-slate-100/70 rounded-lg p-3 text-xs flex flex-wrap items-center justify-between gap-2">
-                <span class="text-slate-600">Merchant: <strong>Savong Organization Cam.</strong> (ACLEDA)</span>
+              <div class="bg-slate-100/80 rounded-xl p-3 text-xs flex flex-wrap items-center justify-between gap-2">
+                <span class="text-slate-600">Merchant: <strong>Savong Organization Cam.</strong> (ACLEDA Bank)</span>
                 <div class="flex items-center gap-1.5">
                   <span class="text-slate-500">ID: <strong>18780473</strong></span>
-                  <button type="button" class="px-2 py-0.5 bg-white border border-slate-200 rounded font-semibold text-brand-700 hover:border-brand-500 transition" onclick="copyText('18780473', 'Merchant ID copied!')">Copy</button>
+                  <button type="button" class="px-2 py-0.5 bg-white border border-slate-200 rounded font-semibold text-brand-700 hover:border-brand-500 transition shadow-sm" onclick="copyText('18780473', 'Merchant ID copied!')">Copy</button>
                 </div>
               </div>
             </div>
@@ -377,9 +416,9 @@
                   <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 6.082-8.558 6.082H9.825a1.98 1.98 0 0 0-1.96 1.676l-1.32 8.354a.641.641 0 0 0 .633.74h3.68a1.12 1.12 0 0 0 1.107-.944l.457-2.9c.084-.518.527-.9 1.052-.9h.663c4.298 0 7.664-1.747 8.647-6.797.412-2.12.157-3.9-.562-5.024z"/></svg>
                 </div>
                 <div>
-                  <h3 class="font-bold text-slate-800 text-sm">PayPal Pool Fund</h3>
+                  <h3 class="font-bold text-slate-800 text-sm">PayPal Giving Pool</h3>
                   <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1">
-                    Direct donation in any currency to support our rural campus in Bakong.
+                    Direct donation in any currency to support our rural school campus in Bakong.
                   </p>
                 </div>
 
@@ -387,7 +426,7 @@
                   href="https://www.paypal.com/pool/9nY6KF1l3C?sr=wccr" 
                   target="_blank" 
                   rel="noopener"
-                  class="inline-flex items-center justify-center gap-2 bg-[#003087] hover:bg-[#001f5c] text-white font-bold py-3 px-6 rounded-xl shadow transition text-sm w-full max-w-xs"
+                  class="inline-flex items-center justify-center gap-2 bg-[#003087] hover:bg-[#001f5c] text-white font-bold py-3 px-6 rounded-xl shadow transition text-sm w-full max-w-xs active:scale-95"
                 >
                   <span>Continue to PayPal Pool</span>
                   <span>→</span>
@@ -408,15 +447,15 @@
                   <span class="text-slate-500">Account Number (USD)</span>
                   <div class="flex items-center gap-2">
                     <strong class="font-mono text-slate-900 font-bold text-sm">0100-20821958-18</strong>
-                    <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition" onclick="copyText('0100-20821958-18', 'Account number copied!')">Copy</button>
+                    <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition shadow-sm" onclick="copyText('0100-20821958-18', 'Account number copied!')">Copy</button>
                   </div>
                 </div>
 
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200">
                   <span class="text-slate-500">SWIFT / BIC Code</span>
                   <div class="flex items-center gap-2">
-                    <strong class="font-mono text-slate-900 font-bold">ACLBKHPP</strong>
-                    <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition" onclick="copyText('ACLBKHPP', 'SWIFT code copied!')">Copy</button>
+                    <strong class="font-mono text-slate-900 font-bold text-sm">ACLBKHPP</strong>
+                    <button type="button" class="px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded hover:bg-brand-100 transition shadow-sm" onclick="copyText('ACLBKHPP', 'SWIFT code copied!')">Copy</button>
                   </div>
                 </div>
 
@@ -449,31 +488,31 @@
           <ul class="text-xs space-y-2 text-slate-600">
             <li class="flex items-start gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
-              <span><strong>Local Bakong Teachers:</strong> Everyday classroom instruction in English and computers.</span>
+              <span><strong>Local Bakong Teachers:</strong> Direct daily instruction in English and computers.</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
-              <span><strong>Village Student Supplies:</strong> Free workbooks, pens, notebooks & study aids for rural kids.</span>
+              <span><strong>Village Student Supplies:</strong> Free workbooks, pens, and pencils for rural kids.</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-brand-500 mt-1.5 shrink-0"></span>
-              <span><strong>Campus Utilities:</strong> Electricity, clean drinking water, hygiene supplies & basic repairs.</span>
+              <span><strong>Campus Utilities:</strong> Electricity for fans and laptops, clean drinking water, and repairs.</span>
             </li>
             <li class="flex items-start gap-2 text-slate-500">
               <span class="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 shrink-0"></span>
-              <span><strong>0% Overhead:</strong> No foreign management commissions or marketing deductions.</span>
+              <span><strong>0% Overhead:</strong> Zero foreign management commissions or marketing deductions.</span>
             </li>
           </ul>
         </div>
 
-        <!-- Direct Contact Card with Vong Svay -->
+        <!-- Direct Contact Card -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3">
           <div class="flex items-center justify-between">
             <h2 class="font-bold text-slate-900 text-sm">Questions? Talk with us</h2>
             <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Bakong Campus Team</span>
           </div>
           <p class="text-xs text-slate-500 leading-relaxed">
-            We are a small, local Cambodian team and happy to confirm gifts or provide signed receipts anytime.
+            We are an approachable Cambodian team and happy to confirm gifts or provide signed receipts anytime.
           </p>
 
           <div class="space-y-2 pt-1">
@@ -481,7 +520,7 @@
             <a 
               href="https://wa.me/855976414414" 
               target="_blank" 
-              rel="noopener"
+              rel="noopener" 
               class="flex items-center justify-between p-2.5 bg-emerald-50/70 hover:bg-emerald-100/70 border border-emerald-200/80 rounded-xl transition text-emerald-900 text-xs font-semibold group"
             >
               <span class="flex items-center gap-2">
@@ -495,7 +534,7 @@
             <a 
               href="https://t.me/vongsvay" 
               target="_blank" 
-              rel="noopener"
+              rel="noopener" 
               class="flex items-center justify-between p-2.5 bg-sky-50/70 hover:bg-sky-100/70 border border-sky-200/80 rounded-xl transition text-sky-900 text-xs font-semibold group"
             >
               <span class="flex items-center gap-2">
@@ -509,7 +548,7 @@
             <a 
               href="https://www.facebook.com/Savongeducation" 
               target="_blank" 
-              rel="noopener"
+              rel="noopener" 
               class="flex items-center justify-between p-2.5 bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/80 rounded-xl transition text-blue-900 text-xs font-semibold group"
             >
               <span class="flex items-center gap-2">
@@ -541,7 +580,7 @@
               <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
             </summary>
             <p class="text-slate-500 pt-1 pb-1 leading-relaxed">
-              100% of your contribution directly funds <strong>Savong Education Bakong</strong> (the second, rural campus in Prasat Bakong district, ~25 km east of Siem Reap City).
+              100% of your contribution directly funds <strong>Savong Education Bakong</strong> in Prasat Bakong district, supporting village children with daily classes and learning supplies.
             </p>
           </details>
           <details class="group text-xs border-t border-slate-100 pt-2">
@@ -553,6 +592,15 @@
               Yes, anytime. Donorbox immediately emails you a secure donor portal link where you can pause, modify, or cancel recurring gifts with one click.
             </p>
           </details>
+          <details class="group text-xs border-t border-slate-100 pt-2">
+            <summary class="font-semibold text-slate-700 cursor-pointer flex justify-between items-center list-none py-1">
+              <span>Will I get a receipt?</span>
+              <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+            </summary>
+            <p class="text-slate-500 pt-1 pb-1 leading-relaxed">
+              Card and PayPal donations automatically generate digital receipts. For KHQR or bank wire transfers, message us on WhatsApp and we will immediately provide a signed receipt.
+            </p>
+          </details>
         </div>
 
       </aside>
@@ -562,16 +610,16 @@
 
   <!-- LIGHTBOX MODAL (For QR enlargement) -->
   <div id="qr-modal" class="lightbox-modal hidden-modal fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl relative">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 text-center space-y-3 shadow-2xl relative">
       <button type="button" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 p-1 text-lg leading-none" onclick="closeLightbox()">&times;</button>
       
-      <div class="space-y-1">
+      <div class="space-y-0.5">
         <h3 id="modal-title" class="font-bold text-slate-900 text-base">KHQR Code</h3>
         <p class="text-xs text-slate-500">Scan with ABA, ACLEDA, Bakong, or Wing</p>
       </div>
 
-      <div class="bg-white p-3 border border-slate-200 rounded-xl shadow-inner max-w-[240px] mx-auto">
-        <img id="modal-img" src="" alt="Enlarged QR code" class="w-full aspect-square object-contain" />
+      <div class="bg-white p-2 border border-slate-200 rounded-xl shadow-inner max-w-[240px] mx-auto aspect-[9/14]">
+        <img id="modal-img" src="" alt="Enlarged QR code" class="w-full h-full object-contain" />
       </div>
 
       <div class="flex gap-2">
@@ -587,16 +635,16 @@
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 pointer-events-none transition-all duration-300 opacity-0 translate-y-4">
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none flex items-center gap-2">
     <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
     <span id="toast-text">Copied to clipboard</span>
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800">
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
       <div>
-        <p class="text-slate-300 font-semibold">Savong Education Bakong (Second Rural Campus)</p>
+        <p class="text-slate-300 font-semibold">Savong Education Bakong</p>
         <p class="text-slate-500 text-[11px] mt-0.5">Savong Organization Cambodia · NGO No. 1372 · Prasat Bakong, Siem Reap</p>
       </div>
       <div class="flex items-center gap-4 text-slate-400">
@@ -605,6 +653,8 @@
         <a href="https://www.facebook.com/Savongeducation" target="_blank" rel="noopener" class="hover:text-white transition">Facebook</a>
         <span>·</span>
         <a href="https://wa.me/855976414414" target="_blank" rel="noopener" class="hover:text-white transition">WhatsApp</a>
+        <span>·</span>
+        <a href="mailto:care@savongeducation.org" class="hover:text-white transition">Email Us</a>
       </div>
     </div>
   </footer>
@@ -615,23 +665,22 @@
     let currentAmount = 25;
 
     const IMPACT_TIERS = {
-      5: "School supplies, pencils & workbooks for a Bakong student",
-      10: "Weekly tutoring & homework support in Bakong village",
-      25: "Full student learning programme at our Bakong campus",
-      50: "Comprehensive sponsorship: tuition, supplies & mentoring"
+      5: "Pencils & workbooks for a Bakong student",
+      10: "Weekly tutoring support in Bakong village",
+      25: "Full student learning programme at Bakong",
+      50: "Comprehensive sponsorship: tuition & supplies"
     };
 
     function setFrequency(freq) {
       currentFrequency = freq;
-      const btnMonthly = document.getElementById('btn-freq-monthly');
-      const btnOnce = document.getElementById('btn-freq-once');
-      
+      const btnM = document.getElementById('btn-freq-monthly');
+      const btnO = document.getElementById('btn-freq-once');
       if (freq === 'monthly') {
-        btnMonthly.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
-        btnOnce.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
+        btnM.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
+        btnO.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
       } else {
-        btnOnce.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
-        btnMonthly.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
+        btnO.className = 'flex-1 py-2 rounded-lg bg-white text-brand-900 shadow-sm transition flex items-center justify-center gap-1.5';
+        btnM.className = 'flex-1 py-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
       }
     }
 
@@ -643,16 +692,14 @@
       document.querySelectorAll('.tier-btn').forEach(btn => {
         const btnAmt = parseInt(btn.dataset.amt, 10);
         if (btnAmt === amt) {
-          btn.className = 'tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-brand-600 bg-brand-50/80 text-brand-700 ring-2 ring-brand-500/20';
+          btn.className = 'tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition border-brand-600 bg-brand-50/80 text-brand-700 ring-2 ring-brand-500/20';
         } else {
-          btn.className = 'tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700';
+          btn.className = 'tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition border-slate-200 text-slate-700 hover:border-brand-500';
         }
       });
 
       const impactEl = document.getElementById('impact-pill');
-      if (impactEl) {
-        impactEl.textContent = IMPACT_TIERS[amt] || "Supports rural education in Bakong";
-      }
+      if (impactEl) impactEl.textContent = IMPACT_TIERS[amt] || "Supports rural education in Bakong";
     }
 
     function onCustomAmountChange(val) {
@@ -660,7 +707,7 @@
       if (!isNaN(parsed) && parsed > 0) {
         currentAmount = parsed;
         document.querySelectorAll('.tier-btn').forEach(btn => {
-          btn.className = 'tier-btn py-3 px-2 rounded-xl border-2 font-bold text-sm sm:text-base transition text-center border-slate-200 hover:border-brand-500 text-slate-700';
+          btn.className = 'tier-btn py-2.5 sm:py-3 rounded-xl border-2 font-bold text-sm sm:text-base transition border-slate-200 text-slate-700 hover:border-brand-500';
         });
         const impactEl = document.getElementById('impact-pill');
         if (impactEl) impactEl.textContent = `Custom gift of $${parsed} to Bakong campus`;
@@ -672,12 +719,11 @@
       tabs.forEach(k => {
         const btn = document.getElementById(`tab-btn-${k}`);
         const panel = document.getElementById(`method-panel-${k}`);
-        
         if (k === methodKey) {
-          if (btn) btn.className = 'pay-tab-btn py-2 px-1 rounded-lg bg-white text-brand-700 shadow-sm transition flex flex-col items-center justify-center gap-0.5';
+          if (btn) btn.className = 'pay-tab-btn py-2.5 px-2 rounded-lg bg-white text-brand-700 shadow-sm transition flex items-center justify-center gap-1.5';
           if (panel) panel.classList.remove('hidden');
         } else {
-          if (btn) btn.className = 'pay-tab-btn py-2 px-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex flex-col items-center justify-center gap-0.5';
+          if (btn) btn.className = 'pay-tab-btn py-2.5 px-2 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1.5';
           if (panel) panel.classList.add('hidden');
         }
       });
@@ -688,60 +734,56 @@
       const modalImg = document.getElementById('modal-img');
       const modalTitle = document.getElementById('modal-title');
       const modalDl = document.getElementById('modal-download');
-      
       if (!modal || !modalImg) return;
       modalImg.src = imgSrc;
       if (modalTitle) modalTitle.textContent = title || 'KHQR Code';
       if (modalDl) {
         modalDl.href = imgSrc;
-        modalDl.download = (title || 'Savong-KHQR').replace(/\s+/g, '-') + '.jpg';
+        modalDl.download = (title || 'Savong-KHQR').replace(/\s+/g, '-') + '.png';
       }
-
       modal.classList.remove('hidden-modal');
       modal.classList.add('active-modal');
     }
 
     function closeLightbox() {
       const modal = document.getElementById('qr-modal');
-      if (!modal) return;
-      modal.classList.remove('active-modal');
-      modal.classList.add('hidden-modal');
+      if (modal) {
+        modal.classList.remove('active-modal');
+        modal.classList.add('hidden-modal');
+      }
     }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeLightbox();
     });
 
-    function copyText(text, successMessage) {
+    function copyText(text, msg) {
       const textArea = document.createElement("textarea");
       textArea.value = text;
       textArea.style.position = "fixed";
       textArea.style.left = "-9999px";
       document.body.appendChild(textArea);
       textArea.select();
-      
       try {
         document.execCommand('copy');
-        showToast(successMessage || 'Copied to clipboard');
+        showToast(msg || 'Copied to clipboard');
       } catch (err) {
         showToast('Please copy manually');
       }
       document.body.removeChild(textArea);
     }
 
-    function showToast(message) {
+    function showToast(msg) {
       const toast = document.getElementById('toast');
       const toastText = document.getElementById('toast-text');
       if (!toast || !toastText) return;
-      
-      toastText.textContent = message;
+      toastText.textContent = msg;
       toast.classList.remove('opacity-0', 'translate-y-4');
       toast.classList.add('opacity-100', 'translate-y-0');
-      
       setTimeout(() => {
         toast.classList.remove('opacity-100', 'translate-y-0');
         toast.classList.add('opacity-0', 'translate-y-4');
-      }, 2200);
+      }, 2000);
     }
   </script>
 </body>
